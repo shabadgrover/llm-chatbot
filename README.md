@@ -45,8 +45,6 @@ This repository contains a fully functional, production-ready LLM chatbot. It us
 ### API Response
 ![API Response Screenshot](screenshots/api_response.png)
 
-*(Note: Replace placeholders with actual GIFs/screenshots)*
-
 ---
 
 ## 🏗 Architecture
