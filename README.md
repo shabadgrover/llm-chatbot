@@ -31,7 +31,7 @@ This repository contains a fully functional, production-ready LLM chatbot. It us
 ## 📸 Demo
 
 ### Live API
-[Link to Live API] (Placeholder)
+*(Deployment coming soon)*
 
 ### Swagger UI
 ![Swagger UI Screenshot](screenshots/swagger_ui.png)
