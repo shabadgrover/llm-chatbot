@@ -1,3 +1,4 @@
+from langchain_core import messages
 import os
 
 from dotenv import load_dotenv
@@ -18,4 +19,8 @@ class LLMService:
     
     def get_response(self, messages):
         response = self.llm.invoke(messages)
-        return response.content
+
+        return {
+            "response": response.content,
+            "usage": response.usage_metadata
+        }

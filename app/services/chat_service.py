@@ -38,6 +38,11 @@ class ChatService:
 
         self.logger = get_logger()
 
+        # Running token statistics
+        self.total_input_tokens = 0
+        self.total_output_tokens = 0
+        self.total_tokens = 0
+
     def chat(self, message):
 
         self.logger.info("Request received")
@@ -56,11 +61,35 @@ class ChatService:
         self.logger.info("LLM request sent")
 
         try:
-            response = self.llm_service.get_response(
+            result = self.llm_service.get_response(
                 self.chat_history
             )
 
+            response = result["response"]
+            usage = result["usage"]
+
+            # Update running totals
+            self.total_input_tokens += usage["input_tokens"]
+            self.total_output_tokens += usage["output_tokens"]
+            self.total_tokens += usage["total_tokens"]
+
             self.logger.info(f"LLM response: {response}")
+
+            # Current request token usage
+            self.logger.info(
+                "Current Token Usage | "
+                f"Input: {usage['input_tokens']} | "
+                f"Output: {usage['output_tokens']} | "
+                f"Total: {usage['total_tokens']}"
+            )
+
+            # Total conversation token usage
+            self.logger.info(
+                "Conversation Token Usage | "
+                f"Input: {self.total_input_tokens} | "
+                f"Output: {self.total_output_tokens} | "
+                f"Total: {self.total_tokens}"
+            )
 
         except Exception as e:
 
